@@ -47,6 +47,7 @@ export async function saveArticleAction(formData: FormData) {
   const slug = slugify(String(formData.get("slug") ?? title));
   const subtitle = String(formData.get("subtitle") ?? "");
   const excerpt = String(formData.get("excerpt") ?? "");
+  const featuredImage = String(formData.get("featuredImage") ?? "").trim();
   const contentMarkdown = String(formData.get("contentMarkdown") ?? "");
   const status = String(formData.get("status") ?? "draft");
   const tagIds = formData.getAll("tagIds").map(String);
@@ -57,6 +58,7 @@ export async function saveArticleAction(formData: FormData) {
     title,
     subtitle,
     excerpt,
+    featured_image: featuredImage || null,
     content_markdown: contentMarkdown,
     status,
     updated_at: now,
@@ -81,7 +83,7 @@ export async function saveArticleAction(formData: FormData) {
 
     revalidatePath("/admin/articles");
     revalidatePath("/essays");
-    redirect(`/admin/articles/${id}`);
+    redirect(`/admin/articles/${id}?saved=1`);
   }
 
   const { data, error } = await client
@@ -102,5 +104,5 @@ export async function saveArticleAction(formData: FormData) {
 
   revalidatePath("/admin/articles");
   revalidatePath("/essays");
-  redirect(`/admin/articles/${data.id}`);
+  redirect(`/admin/articles/${data.id}?saved=1&created=1`);
 }

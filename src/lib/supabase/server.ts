@@ -2,6 +2,7 @@ import "server-only";
 
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@supabase/supabase-js";
 
 import { hasSupabaseEnv } from "@/lib/supabase/env";
 
@@ -44,4 +45,21 @@ export async function getSupabaseUser() {
   } = await client.auth.getUser();
 
   return user;
+}
+
+export function createSupabaseReadClient() {
+  if (!hasSupabaseEnv()) {
+    return null;
+  }
+
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+    },
+  );
 }

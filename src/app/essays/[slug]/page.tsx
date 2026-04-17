@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -69,6 +70,21 @@ export default async function EssayPage({ params }: EssayPageProps) {
             Updated {formatLongDate(article.updatedAt)}
           </p>
         </div>
+
+        {article.featuredImage ? (
+          <figure className="mt-10 overflow-hidden rounded-[2rem] border border-border bg-shell">
+            <div className="relative aspect-[16/9] w-full">
+              <Image
+                src={article.featuredImage}
+                alt={article.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                unoptimized
+              />
+            </div>
+          </figure>
+        ) : null}
 
         <MarkdownRenderer content={article.contentMarkdown} className="pt-8" />
       </article>

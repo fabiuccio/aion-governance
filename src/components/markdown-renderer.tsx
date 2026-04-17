@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -33,6 +34,29 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
           p: ({ children }) => (
             <p className="mt-5 text-lg leading-8 text-ink/78">{children}</p>
           ),
+          img: ({ src, alt, title }) => {
+            if (!src) return null;
+
+            return (
+              <figure className="my-10 overflow-hidden rounded-[1.75rem] border border-border bg-shell">
+                <div className="relative aspect-[16/9] w-full">
+                  <Image
+                    src={src}
+                    alt={alt ?? ""}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 768px"
+                    unoptimized
+                  />
+                </div>
+                {title || alt ? (
+                  <figcaption className="px-5 py-4 text-sm text-ink/58">
+                    {title ?? alt}
+                  </figcaption>
+                ) : null}
+              </figure>
+            );
+          },
           ul: ({ children }) => (
             <ul className="mt-5 space-y-3 pl-5 text-lg leading-8 text-ink/78 marker:text-accent">
               {children}

@@ -93,6 +93,11 @@ create policy "public can read published articles"
 on articles for select
 using (status = 'published');
 
+create policy "authenticated users can manage articles"
+on articles for all
+using (auth.role() = 'authenticated')
+with check (auth.role() = 'authenticated');
+
 create policy "public can read tags"
 on tags for select
 using (true);
@@ -101,13 +106,28 @@ create policy "public can read article tag mapping"
 on article_tags for select
 using (true);
 
+create policy "authenticated users can manage article tag mapping"
+on article_tags for all
+using (auth.role() = 'authenticated')
+with check (auth.role() = 'authenticated');
+
 create policy "public can read frameworks"
 on frameworks for select
 using (true);
 
+create policy "authenticated users can manage frameworks"
+on frameworks for all
+using (auth.role() = 'authenticated')
+with check (auth.role() = 'authenticated');
+
 create policy "public can read profiles"
 on profiles for select
 using (true);
+
+create policy "authenticated users can manage profiles"
+on profiles for all
+using (auth.role() = 'authenticated')
+with check (auth.role() = 'authenticated');
 
 create policy "public can insert newsletter signups"
 on newsletter_signups for insert
@@ -120,3 +140,8 @@ with check (true);
 create policy "public can insert comments"
 on comments for insert
 with check (true);
+
+create policy "authenticated users can moderate comments"
+on comments for all
+using (auth.role() = 'authenticated')
+with check (auth.role() = 'authenticated');

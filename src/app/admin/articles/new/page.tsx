@@ -3,8 +3,18 @@ import Link from "next/link";
 import { AdminArticleForm } from "@/components/admin-article-form";
 import { getAllTags } from "@/lib/content/repository";
 
-export default async function NewArticlePage() {
+interface NewArticlePageProps {
+  searchParams?: {
+    saved?: string;
+  };
+}
+
+export default async function NewArticlePage({
+  searchParams,
+}: NewArticlePageProps) {
   const tags = await getAllTags();
+  const confirmationMessage =
+    searchParams?.saved === "1" ? "Article saved." : undefined;
 
   return (
     <div>
@@ -13,7 +23,10 @@ export default async function NewArticlePage() {
       </Link>
       <h1 className="mt-5 font-serif text-5xl text-ink">New article</h1>
       <div className="mt-10 rounded-[2rem] border border-border bg-paper p-8">
-        <AdminArticleForm tags={tags} />
+        <AdminArticleForm
+          tags={tags}
+          confirmationMessage={confirmationMessage}
+        />
       </div>
     </div>
   );

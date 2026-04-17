@@ -49,8 +49,9 @@ If Supabase is not configured, the public site still works with seeded example c
 ## Supabase setup
 
 1. Run the SQL in `supabase/migrations/001_personal_publishing_platform.sql`.
-2. Run `supabase/seed.sql`.
-3. Create an admin user in Supabase Auth.
+2. Run `supabase/migrations/002_article_images_storage.sql`.
+3. Run `supabase/seed.sql`.
+4. Create an admin user in Supabase Auth.
 
 The schema includes:
 
@@ -62,12 +63,14 @@ The schema includes:
 - `comments`
 - `newsletter_signups`
 - `book_updates_signups`
+- `article-images` public Storage bucket
 
 ## Content workflow
 
 - Public pages currently render from seeded TypeScript content in `src/lib/content/seed.ts`.
 - The editor flow is prepared for Supabase-backed create/update operations in `src/app/admin/actions.ts`.
 - The article editor stores markdown content, draft or published status, and tag mappings.
+- The editor also supports image uploads to Supabase Storage for featured images and inline markdown images.
 - Comments are modeled in the schema but intentionally disabled in the launch UI.
 
 ## Deployment

@@ -1,14 +1,26 @@
+import { AdminImageUploader } from "@/components/admin-image-uploader";
+import { AdminSaveButton } from "@/components/admin-save-button";
 import { saveArticleAction } from "@/app/admin/actions";
 import { ArticleWithRelations, Tag } from "@/lib/content/types";
 
 interface AdminArticleFormProps {
   article?: ArticleWithRelations | null;
   tags: Tag[];
+  confirmationMessage?: string;
 }
 
-export function AdminArticleForm({ article, tags }: AdminArticleFormProps) {
+export function AdminArticleForm({
+  article,
+  tags,
+  confirmationMessage,
+}: AdminArticleFormProps) {
   return (
     <form action={saveArticleAction} className="space-y-6">
+      {confirmationMessage ? (
+        <div className="rounded-[1.5rem] border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm text-emerald-900">
+          {confirmationMessage}
+        </div>
+      ) : null}
       <input type="hidden" name="id" defaultValue={article?.id} />
       <div className="grid gap-6 md:grid-cols-2">
         <label className="space-y-2 text-sm text-ink/75">
@@ -46,6 +58,21 @@ export function AdminArticleForm({ article, tags }: AdminArticleFormProps) {
         />
       </label>
       <label className="space-y-2 text-sm text-ink/75">
+        <span>Featured image URL</span>
+        <input
+          id="featured-image-url"
+          name="featuredImage"
+          defaultValue={article?.featuredImage ?? ""}
+          placeholder="https://..."
+          className="h-12 w-full rounded-2xl border border-border bg-paper px-4 outline-none focus:border-accent"
+        />
+        <p className="text-xs leading-6 text-ink/55">
+          You can also place inline images inside the markdown body with normal
+          markdown syntax: `![Alt text](https://image-url)`.
+        </p>
+      </label>
+      <AdminImageUploader targetInputId="featured-image-url" />
+      <label className="space-y-2 text-sm text-ink/75">
         <span>Content markdown</span>
         <textarea
           name="contentMarkdown"
@@ -82,12 +109,7 @@ export function AdminArticleForm({ article, tags }: AdminArticleFormProps) {
           </select>
         </label>
       </div>
-      <button
-        type="submit"
-        className="inline-flex h-12 items-center justify-center rounded-full bg-ink px-6 text-sm text-paper"
-      >
-        Save article
-      </button>
+      <AdminSaveButton />
     </form>
   );
 }
