@@ -1,57 +1,60 @@
-import { Metadata } from "next";
-import { Linkedin } from "lucide-react";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About the Founder | AION Governance",
-  description: "Meet the executive coach and strategist behind AION's proprietary AI governance frameworks.",
+  title: "About",
+  description:
+    "About Fabio Aulico and the purpose of this publishing platform on AI governance and enterprise architecture.",
 };
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col">
-       <section className="py-24 lg:py-32 bg-brand-light">
-          <div className="section-container lg:grid lg:grid-cols-2 lg:gap-20 items-center">
-             <div className="order-2 lg:order-1">
-                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-brand-dark mb-6 leading-tight uppercase">The Founder</h1>
-                <p className="text-xl text-brand-muted mb-8 leading-relaxed italic border-l-4 border-brand-accent/20 pl-6">
-                   "Governance is not a technical problem; it is an organizational and strategic imperative."
-                </p>
-                <div className="space-y-6 text-brand-muted text-sm leading-relaxed mb-10">
-                   <p>
-                      With over 15 years in enterprise strategy and high-performance operating models, the founder of AION Governance has guided numerous Fortune 500 leadership teams through the complexities of digital transformation and proprietary AI scale.
-                   </p>
-                   <p>
-                      The four core frameworks—Governed AI Loop, Debt Quadrant, Executive Action Framework, and AIOS—were developed through direct interventions within organizations that were struggling to move beyond the "pilot trap."
-                   </p>
-                   <p>
-                      Today, AION serves as a boutique advisory firm for executives who understand that high-quality governance is the ultimate accelerator for AI value realization.
-                   </p>
-                </div>
-                <div className="flex space-x-6">
-                   <a href="/contact" className="btn-primary">Connect with the Founder</a>
-                   <a href="#" className="flex items-center space-x-2 text-brand-muted hover:text-brand-accent text-xs font-bold uppercase tracking-widest transition-colors">
-                      <Linkedin className="w-4 h-4" />
-                      <span>LinkedIn Profile</span>
-                   </a>
-                </div>
-             </div>
-             <div className="order-1 lg:order-2 mb-16 lg:mb-0 aspect-square bg-gray-200 rounded-3xl relative overflow-hidden border border-gray-300 shadow-xl max-w-lg mx-auto lg:max-w-none">
-                <div className="absolute inset-0 flex items-center justify-center text-gray-500 font-mono text-[10px] uppercase tracking-widest text-center p-12">
-                   [ Founder Portrait Placeholder: <br/> Professional / Executive Headshot ]
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-tr from-brand-accent/10 to-transparent"></div>
-             </div>
-          </div>
-       </section>
+    <div className="mx-auto max-w-5xl px-5 pb-24 pt-16 sm:px-8">
+      <div className="max-w-3xl">
+        <p className="text-xs uppercase tracking-[0.28em] text-ink/45">
+          About
+        </p>
+        <h1 className="mt-5 font-serif text-5xl text-ink">Fabio Aulico</h1>
+        <p className="mt-6 text-xl leading-9 text-ink/72">
+          I work at the intersection of enterprise technology, integration,
+          architecture, and AI governance. This site exists as a place to write
+          more carefully about those themes than most company pages allow.
+        </p>
+      </div>
 
-       <section className="py-24 bg-white">
-          <div className="section-container text-center max-w-2xl mx-auto">
-             <h2 className="text-3xl font-bold mb-8 tracking-tight uppercase">The AION Mission</h2>
-             <p className="text-brand-muted mb-12 leading-relaxed">
-               To provide the strategic clarity and rigorous frameworks necessary for AI to become a baseline, high-performance operating model for every global enterprise.
-             </p>
+      <div className="mt-14 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="rounded-[2rem] border border-border bg-paper p-8">
+          <div className="space-y-5 text-lg leading-8 text-ink/72">
+            <p>
+              Much of the current AI conversation is either highly technical or
+              highly promotional. I am more interested in the operating layer in
+              between: the place where architecture, governance, ownership, and
+              organizational reality meet.
+            </p>
+            <p>
+              The writing here is shaped by that perspective. Some pieces are
+              essayistic. Some are closer to framework notes. Some are builder
+              logs. All of them are trying to be useful to serious readers.
+            </p>
+            <p>
+              The audience I have in mind includes enterprise architects,
+              technology leaders, governance teams, and operators who need AI to
+              be manageable in practice, not just impressive in principle.
+            </p>
           </div>
-       </section>
+        </div>
+        <div className="rounded-[2rem] border border-border bg-shell p-8">
+          <p className="text-xs uppercase tracking-[0.24em] text-ink/45">
+            Topics you will find here
+          </p>
+          <ul className="mt-6 space-y-4 text-base leading-7 text-ink/72">
+            <li>AI governance as an operating model</li>
+            <li>Enterprise architecture under AI pressure</li>
+            <li>Integration, control surfaces, and platform design</li>
+            <li>Frameworks from the book, explained in working terms</li>
+            <li>Notes on publishing, tooling, and AI-assisted development</li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

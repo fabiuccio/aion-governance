@@ -9,16 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          dark: "#111827", // Lead gray / Slate 900
-          light: "#F9FAFB", // Minimal white / Gray 50
-          accent: "#2563EB", // Professional Blue / Indigo 600
-          muted: "#4B5563", // Text secondary / Gray 600
-          border: "#E5E7EB", // Subtle borders / Gray 200
-        },
+        paper: "rgb(var(--paper) / <alpha-value>)",
+        shell: "rgb(var(--shell) / <alpha-value>)",
+        ink: "rgb(var(--ink) / <alpha-value>)",
+        border: "rgb(var(--border) / <alpha-value>)",
+        accent: "rgb(var(--accent) / <alpha-value>)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui"],
+        sans: ["var(--font-sans)"],
+        serif: ["var(--font-serif)"],
       },
     },
   },

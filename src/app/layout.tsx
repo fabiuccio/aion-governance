@@ -1,14 +1,30 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+import "./globals.css";
+
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "AION Governance | Enterprise AI Operating Model",
-  description: "AION Governance provides proprietary frameworks for enterprise AI scale. Governed AI as an operating model, not an obstacle. Founder: Boutique AI Governance Firm.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  openGraph: {
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
 };
 
 export default function RootLayout({
@@ -17,13 +33,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} font-sans min-h-screen flex flex-col`}>
-        <Navigation />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
+    <html lang="en">
+      <body className="min-h-screen bg-paper font-sans text-ink antialiased">
+        <div className="relative flex min-h-screen flex-col">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(circle_at_top,rgba(105,137,126,0.12),transparent_60%)]" />
+          <SiteHeader />
+          <main className="relative flex-1">{children}</main>
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );
