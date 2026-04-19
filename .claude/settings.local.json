@@ -4,7 +4,13 @@
       "Bash(npm install *)",
       "Bash(npx vitest *)",
       "Bash(npx tsc *)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(npm ls *)",
+      "Bash(cat tailwind.config.ts)",
+      "Bash(cat tailwind.config.js)",
+      "Bash(cat next.config.ts)",
+      "Bash(cat next.config.js)",
+      "Bash(cat next.config.mjs)"
     ]
   }
 }

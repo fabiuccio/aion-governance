@@ -5,7 +5,7 @@ import { useState } from "react";
 import { saveArticleAction } from "@/app/admin/actions";
 import { AdminImageUploader } from "@/components/admin-image-uploader";
 import { AdminSaveButton } from "@/components/admin-save-button";
-import { MarkdownRenderer } from "@/components/markdown-renderer";
+import { AdminWysiwygEditor } from "@/components/admin-wysiwyg-editor";
 import { ArticleWithRelations, Tag } from "@/lib/content/types";
 import { slugify } from "@/lib/utils";
 
@@ -28,7 +28,6 @@ export function AdminArticleForm({ article, tags, confirmationMessage }: AdminAr
   const isNew = !article?.id;
   const [slug, setSlug] = useState(article?.slug ?? "");
   const [markdownContent, setMarkdownContent] = useState(article?.contentMarkdown ?? "");
-  const [showPreview, setShowPreview] = useState(false);
   const [seoTitle, setSeoTitle] = useState(article?.seoTitle ?? "");
   const [seoDescription, setSeoDescription] = useState(article?.seoDescription ?? "");
 
@@ -113,36 +112,12 @@ export function AdminArticleForm({ article, tags, confirmationMessage }: AdminAr
       <AdminImageUploader targetInputId="featured-image-url" />
 
       <div className="space-y-2 text-sm text-ink/75">
-        <div className="flex items-center justify-between">
-          <span>Content markdown</span>
-          <button
-            type="button"
-            onClick={() => setShowPreview((v) => !v)}
-            className="rounded-full border border-border px-3 py-1 text-xs text-ink/65 transition-colors hover:border-accent hover:text-accent"
-          >
-            {showPreview ? "← Edit" : "Preview →"}
-          </button>
-        </div>
-        {showPreview ? (
-          <>
-            <input type="hidden" name="contentMarkdown" value={markdownContent} />
-            <div className="min-h-64 rounded-[1.5rem] border border-dashed border-border bg-paper p-6">
-              {markdownContent ? (
-                <MarkdownRenderer content={markdownContent} />
-              ) : (
-                <p className="text-sm text-ink/40">Nothing to preview yet.</p>
-              )}
-            </div>
-          </>
-        ) : (
-          <textarea
-            name="contentMarkdown"
-            value={markdownContent}
-            onChange={(e) => setMarkdownContent(e.target.value)}
-            rows={18}
-            className="w-full rounded-[1.5rem] border border-border bg-paper px-4 py-3 font-mono text-sm outline-none focus:border-accent"
-          />
-        )}
+        <span>Content</span>
+        <input type="hidden" name="contentMarkdown" value={markdownContent} />
+        <AdminWysiwygEditor
+          initialMarkdown={markdownContent}
+          onChange={setMarkdownContent}
+        />
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
