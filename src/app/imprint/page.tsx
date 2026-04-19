@@ -33,9 +33,7 @@ export default function ImprintPage() {
           <address className="mt-2 not-italic text-base leading-7 text-ink">
             Fabio Aulico
             <br />
-            Rämistrasse 18
-            <br />
-            8001 Zürich
+            8854 Siebnen
             <br />
             Switzerland
           </address>

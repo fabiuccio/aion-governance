@@ -200,6 +200,70 @@ function StageBar({ activeStage }: { activeStage: number }) {
   );
 }
 
+function RadarChart({ answers }: { answers: Record<number, number> }) {
+  const cx = 150;
+  const cy = 138;
+  const r = 92;
+  const n = SECTIONS.length;
+
+  const data = SECTIONS.map((section) => {
+    const score = getSectionScore(section.id, answers);
+    const max = section.questions.length * 4;
+    return { phase: section.phase, title: section.title, score, max, ratio: score / max };
+  });
+
+  const angles = data.map((_, i) => (i * 2 * Math.PI) / n - Math.PI / 2);
+  const pt = (angle: number, radius: number): [number, number] => [
+    cx + radius * Math.cos(angle),
+    cy + radius * Math.sin(angle),
+  ];
+  const toPath = (pts: [number, number][]) =>
+    pts.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ") + " Z";
+
+  const dataPath = toPath(data.map((s, i) => pt(angles[i], s.ratio * r)));
+  const gridLevels = [0.25, 0.5, 0.75, 1];
+
+  return (
+    <svg viewBox="0 0 300 276" className="w-full" aria-hidden="true">
+      {gridLevels.map((level) => (
+        <path
+          key={level}
+          d={toPath(angles.map((a) => pt(a, level * r)))}
+          fill="none"
+          stroke="rgb(var(--border))"
+          strokeWidth="1"
+        />
+      ))}
+      {angles.map((angle, i) => {
+        const [x, y] = pt(angle, r);
+        return (
+          <line key={i} x1={cx} y1={cy} x2={x.toFixed(1)} y2={y.toFixed(1)} stroke="rgb(var(--border))" strokeWidth="1" />
+        );
+      })}
+      <path d={dataPath} fill="rgba(105,137,126,0.18)" stroke="rgb(105,137,126)" strokeWidth="2" strokeLinejoin="round" />
+      {data.map((s, i) => {
+        const [x, y] = pt(angles[i], s.ratio * r);
+        return <circle key={i} cx={x.toFixed(1)} cy={y.toFixed(1)} r="3.5" fill="rgb(105,137,126)" />;
+      })}
+      {data.map((s, i) => {
+        const labelR = r + 24;
+        const [lx, ly] = pt(angles[i], labelR);
+        const anchor = lx < cx - 8 ? "end" : lx > cx + 8 ? "start" : "middle";
+        return (
+          <g key={i}>
+            <text x={lx.toFixed(1)} y={(ly - 5).toFixed(1)} textAnchor={anchor} fontSize="9" fill="rgb(var(--ink))" opacity="0.45" fontFamily="sans-serif">
+              {s.phase}
+            </text>
+            <text x={lx.toFixed(1)} y={(ly + 9).toFixed(1)} textAnchor={anchor} fontSize="11" fontWeight="600" fill="rgb(var(--ink))" fontFamily="sans-serif">
+              {s.score}/{s.max}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 function ResultsStep({
   answers,
   onReset,
@@ -268,31 +332,11 @@ function ResultsStep({
         </div>
       </div>
 
-      <div className="space-y-3">
-        <h3 className="text-sm font-medium text-[rgb(var(--ink))]">
+      <div>
+        <h3 className="text-sm font-medium text-[rgb(var(--ink))] mb-4">
           Section breakdown
         </h3>
-        {SECTIONS.map((section) => {
-          const sScore = getSectionScore(section.id, answers);
-          const max = section.questions.length * 4;
-          const pct = Math.round((sScore / max) * 100);
-          return (
-            <div key={section.id} className="space-y-1">
-              <div className="flex justify-between text-xs text-[rgb(var(--ink))]">
-                <span className="opacity-80">{section.title}</span>
-                <span className="font-medium">
-                  {sScore}/{max}
-                </span>
-              </div>
-              <div className="w-full bg-[rgb(var(--shell))] rounded-full h-1.5">
-                <div
-                  className="bg-[rgb(var(--accent))] h-1.5 rounded-full transition-all"
-                  style={{ width: `${pct}%` }}
-                />
-              </div>
-            </div>
-          );
-        })}
+        <RadarChart answers={answers} />
       </div>
 
       {!submitted ? (

@@ -25,8 +25,7 @@ export default function PrivacyPage() {
             1. Controller
           </h2>
           <p>
-            The data controller for this website is Fabio Aulico, Rämistrasse
-            18, 8001 Zürich, Switzerland.{" "}
+            The data controller for this website is Fabio Aulico, 8854 Siebnen, Switzerland.{" "}
             <a
               href="mailto:fabio@aion-governance.ch"
               className="text-ink hover:text-ink/70 transition-colors"

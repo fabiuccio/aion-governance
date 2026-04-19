@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import { getMaturityStage, SECTIONS, getSectionScore } from "./assessment-data";
 
-const FROM = "AION Governance <hello@aion-governance.ch>";
+const FROM = "AION Governance <onboarding@resend.dev>";
 
 function getResend(): Resend | null {
   const key = process.env.RESEND_API_KEY;
@@ -83,11 +83,14 @@ export async function sendAssessmentReport(params: {
               ${sectionRows}
             </table>
 
+            <div style="border-left:3px solid #8FA680;background:#f5f1ea;border-radius:0 6px 6px 0;padding:16px 20px;margin:32px 0 0;">
+              <p style="margin:0 0 6px;font-size:12px;color:#697989;text-transform:uppercase;letter-spacing:1px;">One more thing</p>
+              <p style="margin:0;font-size:15px;color:#1c1f23;line-height:1.6;">
+                Questions about your score? Want to talk through what it means for your organisation, your board, or your team?
+                <strong>Just reply to this email.</strong> Fabio reads and replies to every one personally.
+              </p>
+            </div>
             <hr style="border:none;border-top:1px solid #e8e4dc;margin:32px 0;"/>
-            <p style="font-size:13px;color:#9a9a9a;margin:0;line-height:1.6;">
-              Want to discuss your results or explore how AION Governance can support your maturity journey?
-              Reply to this email — we read everything.
-            </p>
           </td>
         </tr>
         <tr>
