@@ -1,8 +1,7 @@
 import { Resend } from "resend";
 import { getMaturityStage, SECTIONS, getSectionScore } from "./assessment-data";
 
-//const FROM = "AION Governance <hello@aion-governance.ch>";
-const FROM = "AION Governance <onboarding@resend.dev>";
+const FROM = "AION Governance <hello@aion-governance.ch>";
 
 function getResend(): Resend | null {
   const key = process.env.RESEND_API_KEY;
