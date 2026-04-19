@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AdminArticleForm } from "@/components/admin-article-form";
+import { AdminDeleteButton } from "@/components/admin-delete-button";
 import { getAllArticles, getAllTags } from "@/lib/content/repository";
 
 interface AdminArticleDetailPageProps {
@@ -38,9 +39,12 @@ export default async function AdminArticleDetailPage({
 
   return (
     <div>
-      <Link href="/admin/articles" className="text-sm text-ink/55 hover:text-ink">
-        Back to articles
-      </Link>
+      <div className="flex items-center justify-between">
+        <Link href="/admin/articles" className="text-sm text-ink/55 hover:text-ink">
+          Back to articles
+        </Link>
+        <AdminDeleteButton articleId={params.id} />
+      </div>
       <h1 className="mt-5 font-serif text-5xl text-ink">Edit article</h1>
       <div className="mt-10 rounded-[2rem] border border-border bg-paper p-8">
         <AdminArticleForm

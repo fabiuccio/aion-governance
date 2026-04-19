@@ -5,6 +5,8 @@ import { useMemo, useState } from "react";
 import { ArticleCard } from "@/components/article-card";
 import { ArticleWithRelations, Tag } from "@/lib/content/types";
 
+const ITEMS_PER_PAGE = 12;
+
 interface EssayBrowserProps {
   articles: ArticleWithRelations[];
   tags: Tag[];
@@ -13,6 +15,7 @@ interface EssayBrowserProps {
 export function EssayBrowser({ articles, tags }: EssayBrowserProps) {
   const [query, setQuery] = useState("");
   const [activeTag, setActiveTag] = useState<string>("all");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const filtered = useMemo(() => {
     return articles.filter((article) => {
@@ -31,23 +34,35 @@ export function EssayBrowser({ articles, tags }: EssayBrowserProps) {
     });
   }, [activeTag, articles, query]);
 
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const safePage = Math.min(currentPage, Math.max(1, totalPages));
+  const paginated = filtered.slice((safePage - 1) * ITEMS_PER_PAGE, safePage * ITEMS_PER_PAGE);
+
+  function handleQueryChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setQuery(e.target.value);
+    setCurrentPage(1);
+  }
+
+  function handleTagChange(tag: string) {
+    setActiveTag(tag);
+    setCurrentPage(1);
+  }
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col gap-4 rounded-[2rem] border border-border bg-shell p-6">
         <input
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={handleQueryChange}
           placeholder="Search essays"
           className="h-12 rounded-full border border-border bg-paper px-5 text-sm text-ink outline-none focus:border-accent"
         />
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => setActiveTag("all")}
+            onClick={() => handleTagChange("all")}
             className={`rounded-full px-4 py-2 text-sm ${
-              activeTag === "all"
-                ? "bg-ink text-paper"
-                : "border border-border text-ink/65"
+              activeTag === "all" ? "bg-ink text-paper" : "border border-border text-ink/65"
             }`}
           >
             All topics
@@ -56,11 +71,9 @@ export function EssayBrowser({ articles, tags }: EssayBrowserProps) {
             <button
               key={tag.id}
               type="button"
-              onClick={() => setActiveTag(tag.slug)}
+              onClick={() => handleTagChange(tag.slug)}
               className={`rounded-full px-4 py-2 text-sm ${
-                activeTag === tag.slug
-                  ? "bg-ink text-paper"
-                  : "border border-border text-ink/65"
+                activeTag === tag.slug ? "bg-ink text-paper" : "border border-border text-ink/65"
               }`}
             >
               {tag.name}
@@ -70,7 +83,7 @@ export function EssayBrowser({ articles, tags }: EssayBrowserProps) {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        {filtered.map((article) => (
+        {paginated.map((article) => (
           <ArticleCard key={article.id} article={article} />
         ))}
       </div>
@@ -78,6 +91,30 @@ export function EssayBrowser({ articles, tags }: EssayBrowserProps) {
       {filtered.length === 0 ? (
         <div className="rounded-[1.75rem] border border-dashed border-border bg-paper p-8 text-center text-ink/60">
           No essays match this filter yet.
+        </div>
+      ) : null}
+
+      {totalPages > 1 ? (
+        <div className="flex items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={safePage === 1}
+            className="inline-flex h-10 items-center justify-center rounded-full border border-border px-5 text-sm text-ink/65 disabled:opacity-40 hover:border-accent hover:text-accent transition-colors"
+          >
+            Previous
+          </button>
+          <span className="text-sm text-ink/50">
+            {safePage} / {totalPages}
+          </span>
+          <button
+            type="button"
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={safePage === totalPages}
+            className="inline-flex h-10 items-center justify-center rounded-full border border-border px-5 text-sm text-ink/65 disabled:opacity-40 hover:border-accent hover:text-accent transition-colors"
+          >
+            Next
+          </button>
         </div>
       ) : null}
     </div>

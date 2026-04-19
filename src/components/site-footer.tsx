@@ -7,10 +7,16 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-paper">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 text-sm text-ink/65 sm:px-8 md:flex-row md:justify-between">
         <div className="max-w-md space-y-3">
-          <p className="font-serif text-xl text-ink">Fabio Aulico</p>
+          <p className="font-serif text-xl text-ink">
+            Fabio Aulico · AION Governance
+          </p>
           <p>
             Essays, notes, and frameworks on AI governance, enterprise
             architecture, and the operating realities behind durable AI work.
+          </p>
+          <p className="text-xs text-ink/45 italic">
+            AION — AI-on. Governance that is switched on in architecture, not
+            written in policy.
           </p>
         </div>
         <div className="flex gap-6 text-sm">

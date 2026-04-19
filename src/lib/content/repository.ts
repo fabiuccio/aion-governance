@@ -120,7 +120,11 @@ async function fetchArticlesFromSupabase(status?: "draft" | "published") {
     .order("published_at", { ascending: false, nullsFirst: false })
     .order("updated_at", { ascending: false });
 
-  if (status) {
+  if (status === "published") {
+    query = query
+      .eq("status", status)
+      .lte("published_at", new Date().toISOString());
+  } else if (status) {
     query = query.eq("status", status);
   }
 
@@ -312,6 +316,30 @@ export const getFrameworks = cache(async () => {
 export const getFrameworkBySlug = cache(async (slug: string) => {
   const all = await getFrameworks();
   return all.find((framework) => framework.slug === slug) ?? null;
+});
+
+export interface ApprovedComment {
+  id: string;
+  author_name: string | null;
+  body: string;
+  created_at: string;
+}
+
+export const getApprovedComments = cache(async (articleId: string): Promise<ApprovedComment[]> => {
+  if (!hasSupabaseEnv() || !articleId) return [];
+
+  const client = createSupabaseServerClient();
+  if (!client) return [];
+
+  const { data, error } = await client
+    .from("comments")
+    .select("id, author_name, body, created_at")
+    .eq("article_id", articleId)
+    .eq("moderation_status", "approved")
+    .order("created_at", { ascending: true });
+
+  if (error || !data) return [];
+  return data as ApprovedComment[];
 });
 
 export const getFeaturedArticles = cache(async () => {

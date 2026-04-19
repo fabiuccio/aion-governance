@@ -4,8 +4,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ArticleCard } from "@/components/article-card";
+import { CommentSection } from "@/components/comment-section";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
-import { getArticleBySlug, getRelatedArticles } from "@/lib/content/repository";
+import { getApprovedComments, getArticleBySlug, getRelatedArticles } from "@/lib/content/repository";
 import { formatLongDate } from "@/lib/utils";
 
 interface EssayPageProps {
@@ -36,7 +37,10 @@ export default async function EssayPage({ params }: EssayPageProps) {
     notFound();
   }
 
-  const related = await getRelatedArticles(article.slug);
+  const [related, comments] = await Promise.all([
+    getRelatedArticles(article.slug),
+    getApprovedComments(article.id),
+  ]);
 
   return (
     <div className="mx-auto max-w-4xl px-5 pb-24 pt-16 sm:px-8">
@@ -90,10 +94,7 @@ export default async function EssayPage({ params }: EssayPageProps) {
       </article>
 
       <section className="mt-20 border-t border-border pt-10">
-        <div className="rounded-[1.75rem] border border-dashed border-border bg-shell p-6 text-sm leading-7 text-ink/65">
-          Comments are supported in the schema and admin flow, but they are
-          disabled for the initial launch while the editorial workflow settles.
-        </div>
+        <CommentSection articleId={article.id} comments={comments} />
       </section>
 
       {related.length > 0 ? (

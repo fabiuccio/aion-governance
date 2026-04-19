@@ -51,7 +51,13 @@ export async function saveArticleAction(formData: FormData) {
   const contentMarkdown = String(formData.get("contentMarkdown") ?? "");
   const status = String(formData.get("status") ?? "draft");
   const tagIds = formData.getAll("tagIds").map(String);
+  const seoTitle = String(formData.get("seoTitle") ?? "").trim() || title;
+  const seoDescription = String(formData.get("seoDescription") ?? "").trim() || excerpt;
+  const publishedAtRaw = String(formData.get("publishedAt") ?? "").trim();
   const now = new Date().toISOString();
+  const publishedAt = status === "published"
+    ? publishedAtRaw ? new Date(publishedAtRaw).toISOString() : now
+    : null;
 
   const payload = {
     slug,
@@ -62,10 +68,10 @@ export async function saveArticleAction(formData: FormData) {
     content_markdown: contentMarkdown,
     status,
     updated_at: now,
-    seo_title: title,
-    seo_description: excerpt,
+    seo_title: seoTitle,
+    seo_description: seoDescription,
     author_id: "fabio-aulico",
-    published_at: status === "published" ? now : null,
+    published_at: publishedAt,
   };
 
   if (id) {
@@ -105,4 +111,22 @@ export async function saveArticleAction(formData: FormData) {
   revalidatePath("/admin/articles");
   revalidatePath("/essays");
   redirect(`/admin/articles/${data.id}?saved=1&created=1`);
+}
+
+export async function deleteArticleAction(formData: FormData) {
+  const client = createSupabaseServerClient();
+
+  if (!client || !hasSupabaseEnv()) {
+    return;
+  }
+
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+
+  const { error } = await client.from("articles").delete().eq("id", id);
+  if (error) return;
+
+  revalidatePath("/admin/articles");
+  revalidatePath("/essays");
+  redirect("/admin/articles");
 }

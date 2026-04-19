@@ -15,16 +15,19 @@ export default async function HomePage() {
       <section className="grid gap-14 lg:grid-cols-[1.3fr_0.7fr] lg:items-end">
         <div className="max-w-3xl">
           <p className="text-xs uppercase tracking-[0.28em] text-ink/45">
-            Fabio Aulico&apos;s notes on AI governance
+            Fabio Aulico · AION Governance
           </p>
           <h1 className="mt-6 font-serif text-5xl leading-[1.02] text-ink sm:text-6xl lg:text-7xl">
-            Essays, frameworks, and book material on how enterprise AI becomes
-            governable.
+            Enterprise AI scales when governance is architecture, not policy.
           </h1>
           <p className="mt-8 max-w-2xl text-xl leading-9 text-ink/72">
-            This is a personal publishing platform for operator-level
-            reflections on AI governance, enterprise architecture, integration,
-            and the practical discipline required to move beyond AI theater.
+            A publishing platform for operators working on the gap between AI
+            ambition and production reality. Essays, frameworks, and the
+            forthcoming book —{" "}
+            <em>
+              Govern or Fail: The Executive Playbook for Enterprise AI That
+              Actually Scales.
+            </em>
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
@@ -37,7 +40,7 @@ export default async function HomePage() {
               href="/book"
               className="inline-flex h-12 items-center justify-center rounded-full border border-border px-6 text-sm text-ink"
             >
-              Explore the book
+              About the book
             </Link>
           </div>
         </div>
@@ -46,12 +49,14 @@ export default async function HomePage() {
             Core thesis
           </p>
           <p className="mt-5 font-serif text-3xl leading-tight text-ink">
-            AI governance is not a paperwork layer added after the fact.
+            Ungoverned AI is a short-term arbitrage that collapses. Governed AI
+            is a compounding structural advantage by the third deployment.
           </p>
           <p className="mt-5 text-base leading-7 text-ink/70">
-            It is an operating discipline that has to show up in architecture,
-            decision rights, interfaces, and delivery rhythm. The site is where
-            I am working through that idea in public.
+            The governance failures breaking enterprise AI programs are not
+            policy failures. They are architecture failures — distance between
+            what governance documents say and what the infrastructure actually
+            enforces.
           </p>
         </div>
       </section>
@@ -63,13 +68,14 @@ export default async function HomePage() {
           </p>
           <div className="mt-5 space-y-5 text-lg leading-8 text-ink/74">
             <p>
-              The goal is simple: to collect essays, working ideas, and
-              frameworks that are useful to serious operators dealing with AI in
-              large organizations.
+              Between eighty and ninety-five percent of enterprise AI initiatives
+              never reach production. The technology works in most of them. What
+              fails is the operating model around it.
             </p>
             <p>
-              It is intentionally personal-first. Less company posture, more
-              clear thinking. Less funnel behavior, more durable writing.
+              This site works through that problem in public — the gap between
+              what governance documents say and what production infrastructure
+              actually enforces. Less company posture, more clear thinking.
             </p>
           </div>
         </div>
@@ -78,10 +84,24 @@ export default async function HomePage() {
             Current threads
           </p>
           <ul className="mt-6 space-y-4 text-base leading-7 text-paper/78">
-            <li>Governance debt and its architectural roots</li>
-            <li>The operating layer behind enterprise AI</li>
-            <li>Frameworks from the book, explained without sales language</li>
-            <li>Builder notes on tools, infrastructure, and publishing</li>
+            <li>
+              The Debt Quadrant: diagnosing where your AI estate actually sits
+            </li>
+            <li>
+              AIOS: the runtime layer that turns governance documents into
+              enforced policy
+            </li>
+            <li>
+              The Velocity Thesis: why governed teams overtake ungoverned ones by
+              deployment three
+            </li>
+            <li>
+              EU AI Act preparation: what the delayed enforcement actually
+              changes
+            </li>
+            <li>
+              Builder notes on writing, publishing, and AI-assisted development
+            </li>
           </ul>
         </div>
       </section>
@@ -111,8 +131,13 @@ export default async function HomePage() {
             Frameworks
           </p>
           <h2 className="mt-3 font-serif text-4xl text-ink">
-            Working structures from the book
+            Four frameworks. One operating model.
           </h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-ink/70">
+            The Debt Quadrant diagnoses where your estate sits. The Governed AI
+            Loop is the operating cadence. AIOS is the infrastructure. The
+            Executive Action Framework is how you start.
+          </p>
         </div>
         <div className="grid gap-6 md:grid-cols-2">
           {frameworks.map((framework) => (
@@ -137,7 +162,7 @@ export default async function HomePage() {
 
       <NewsletterSignup
         title="Book updates and occasional notes"
-        description="A simple email list for new essays, framework updates, and progress on the book. No funnel sequence. Just updates when there is something worth sending."
+        description="A note when there is something worth sending — new essays, framework updates, and progress on Govern or Fail. No funnel sequence."
       />
     </div>
   );
