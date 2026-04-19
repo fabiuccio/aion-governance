@@ -44,7 +44,7 @@ export default async function HomePage() {
             </Link>
           </div>
         </div>
-        <div className="rounded-[2rem] border border-border bg-shell p-8">
+        <div className="rounded-[2rem] border border-border border-l-[3px] border-l-[#8FA680] bg-shell p-8">
           <p className="text-xs uppercase tracking-[0.24em] text-ink/45">
             Core thesis
           </p>
@@ -79,11 +79,11 @@ export default async function HomePage() {
             </p>
           </div>
         </div>
-        <div className="rounded-[2rem] border border-border bg-ink px-8 py-10 text-paper">
-          <p className="text-xs uppercase tracking-[0.24em] text-paper/55">
+        <div className="rounded-[2rem] border border-border bg-shell p-8">
+          <p className="text-xs uppercase tracking-[0.24em] text-ink/45">
             Current threads
           </p>
-          <ul className="mt-6 space-y-4 text-base leading-7 text-paper/78">
+          <ul className="mt-6 space-y-4 text-base leading-7 text-ink/74">
             <li>
               The Debt Quadrant: diagnosing where your AI estate actually sits
             </li>

@@ -5,8 +5,8 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-border bg-paper">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 text-sm text-ink/65 sm:px-8 md:flex-row md:justify-between">
-        <div className="max-w-md space-y-3">
+      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-12 text-sm text-ink/65 sm:px-8 md:flex-row md:justify-between md:gap-8">
+        <div className="max-w-sm space-y-3">
           <p className="font-serif text-xl text-ink">
             Fabio Aulico · AION Governance
           </p>
@@ -15,29 +15,33 @@ export function SiteFooter() {
             architecture, and the operating realities behind durable AI work.
           </p>
           <p className="text-xs text-ink/45 italic">
-            AION — AI-on. Governance that is switched on in architecture, not
-            written in policy.
+            AION — AI-on. Governance switched on in architecture, not written in
+            policy.
           </p>
         </div>
-        <div className="flex gap-6 text-sm">
-          <Link href="/essays" className="hover:text-ink">
-            Essays
-          </Link>
-          <Link href="/frameworks" className="hover:text-ink">
-            Frameworks
-          </Link>
-          <Link href="/book" className="hover:text-ink">
-            Book
-          </Link>
-          <Link href="/about" className="hover:text-ink">
-            About
-          </Link>
-          <Link href="/privacy" className="hover:text-ink">
-            Privacy
-          </Link>
-          <Link href="/imprint" className="hover:text-ink">
-            Imprint
-          </Link>
+        <div className="flex gap-12">
+          <div className="space-y-3">
+            <p className="text-xs uppercase tracking-[0.2em] text-ink/35">
+              Tools
+            </p>
+            <nav className="flex flex-col gap-2">
+              <Link href="/assessment" className="hover:text-ink transition-colors">Assessment</Link>
+              <Link href="/debt-quadrant" className="hover:text-ink transition-colors">Debt Quadrant</Link>
+              <Link href="/sprint" className="hover:text-ink transition-colors">90-Day Sprint</Link>
+              <Link href="/downloads" className="hover:text-ink transition-colors">Downloads</Link>
+            </nav>
+          </div>
+          <div className="space-y-3">
+            <p className="text-xs uppercase tracking-[0.2em] text-ink/35">
+              Reference
+            </p>
+            <nav className="flex flex-col gap-2">
+              <Link href="/glossary" className="hover:text-ink transition-colors">Glossary</Link>
+              <Link href="/resources" className="hover:text-ink transition-colors">Resources</Link>
+              <Link href="/privacy" className="hover:text-ink transition-colors">Privacy</Link>
+              <Link href="/imprint" className="hover:text-ink transition-colors">Imprint</Link>
+            </nav>
+          </div>
         </div>
       </div>
       <div className="border-t border-border/70 px-5 py-4 text-center text-xs uppercase tracking-[0.18em] text-ink/45 sm:px-8">

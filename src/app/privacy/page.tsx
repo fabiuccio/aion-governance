@@ -1,122 +1,188 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Notice | AION Governance",
+  title: "Privacy Notice",
   description: "How AION Governance collects, uses, and protects personal data.",
 };
 
-// TODO: Have this notice reviewed by a qualified legal or data protection professional before publishing.
-
 export default function PrivacyPage() {
   return (
-    <div className="flex flex-col py-24">
-      <section className="section-container max-w-3xl">
-        <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-brand-accent mb-4">Data & Privacy</p>
-        <h1 className="text-3xl font-extrabold text-brand-dark mb-4 tracking-tight uppercase">Privacy Notice</h1>
-        <p className="text-brand-muted text-sm mb-2 leading-relaxed">
-          This notice explains how AION Governance collects, uses, and stores personal data in connection with this website.
-        </p>
-        <p className="text-brand-muted text-sm mb-12 leading-relaxed">
-          {/* TODO: Insert legal entity name and registered address when incorporated */}
-          This is a preliminary template. It will be updated with complete legal entity details prior to formal launch.
-        </p>
+    <div className="mx-auto max-w-3xl px-5 pb-24 pt-16 sm:px-8">
+      <p className="text-xs uppercase tracking-[0.28em] text-ink/45">
+        Data &amp; privacy
+      </p>
+      <h1 className="mt-5 font-serif text-5xl text-ink">Privacy Notice</h1>
+      <p className="mt-6 text-lg leading-8 text-ink/70">
+        This notice explains how AION Governance collects, uses, and stores
+        personal data in connection with this website. It applies to all
+        visitors and subscribers.
+      </p>
 
-        <div className="space-y-10 text-brand-muted text-sm leading-relaxed">
+      <div className="mt-14 space-y-12 text-base leading-7 text-ink/70">
 
-          <div>
-            <p className="font-bold text-brand-dark uppercase tracking-wide text-xs mb-3">1. What Data We Collect</p>
-            <p>We collect personal data only when you actively provide it. This currently includes:</p>
-            <ul className="mt-3 space-y-2 list-none pl-4 border-l-2 border-brand-accent/20">
-              <li>
-                <span className="font-medium text-brand-dark">Contact form submissions</span> — your name, email address, and any message or context you choose to include when reaching out via the contact form.
-              </li>
-              <li>
-                <span className="font-medium text-brand-dark">Newsletter or update sign-ups</span> — your email address, if you choose to subscribe to updates related to the book or AION content.
-              </li>
-            </ul>
-            <p className="mt-3">
-              We do not collect sensitive personal data, financial data, or data relating to minors.
-            </p>
-          </div>
+        <section className="space-y-4">
+          <h2 className="text-xs uppercase tracking-[0.22em] text-ink/45">
+            1. Controller
+          </h2>
+          <p>
+            The data controller for this website is Fabio Aulico, Rämistrasse
+            18, 8001 Zürich, Switzerland.{" "}
+            <a
+              href="mailto:fabio@aion-governance.ch"
+              className="text-ink hover:text-ink/70 transition-colors"
+            >
+              fabio@aion-governance.ch
+            </a>
+          </p>
+        </section>
 
-          <div>
-            <p className="font-bold text-brand-dark uppercase tracking-wide text-xs mb-3">2. How We Use Your Data</p>
-            <p>Data you submit is used solely for the following purposes:</p>
-            <ul className="mt-3 space-y-2 list-none pl-4 border-l-2 border-brand-accent/20">
-              <li><span className="font-medium text-brand-dark">Responding to your inquiry</span> — to reply to messages sent through the contact form.</li>
-              <li><span className="font-medium text-brand-dark">Sending updates</span> — if you have signed up for notifications, to inform you of relevant content such as book launch updates or new framework publications.</li>
-              <li><span className="font-medium text-brand-dark">Improving our services</span> — to understand, in aggregate, what topics are of interest to visitors.</li>
-            </ul>
-            <p className="mt-3">
-              We do not use your data for automated decision-making, profiling, or targeted advertising.
-            </p>
-          </div>
+        <section className="space-y-4">
+          <h2 className="text-xs uppercase tracking-[0.22em] text-ink/45">
+            2. Data we collect
+          </h2>
+          <p>
+            We collect personal data only when you actively provide it. This
+            currently includes:
+          </p>
+          <ul className="space-y-3 border-l-2 border-border pl-5">
+            <li>
+              <span className="font-medium text-ink">
+                Newsletter and book update sign-ups
+              </span>{" "}
+              — your email address, and optionally your name, if you subscribe
+              to updates.
+            </li>
+            <li>
+              <span className="font-medium text-ink">
+                AI Governance Maturity Assessment
+              </span>{" "}
+              — your email address, optionally your name, your answers to the
+              25 assessment questions, and your maturity score, if you request a
+              results report.
+            </li>
+          </ul>
+          <p>
+            We do not collect sensitive personal data, financial data, or any
+            data from minors. We do not use cookies for tracking or advertising.
+          </p>
+        </section>
 
-          <div>
-            <p className="font-bold text-brand-dark uppercase tracking-wide text-xs mb-3">3. Third-Party Services</p>
-            <p>
-              This website uses a limited number of third-party services to operate. These may include:
-            </p>
-            <ul className="mt-3 space-y-2 list-none pl-4 border-l-2 border-brand-accent/20">
-              <li>
-                <span className="font-medium text-brand-dark">Email delivery</span> — {/* TODO: Insert name of email service provider (e.g. Resend, Mailchimp, SendGrid) */}
-                <span className="italic text-gray-400">[TODO: name of provider]</span>, used to receive and manage contact form submissions and newsletter sends.
-              </li>
-              <li>
-                <span className="font-medium text-brand-dark">Web analytics</span> — {/* TODO: Insert analytics provider (e.g. Plausible, Fathom, Google Analytics) and privacy settings */}
-                <span className="italic text-gray-400">[TODO: name of provider]</span>, used to understand aggregate website traffic in a privacy-respecting manner.
-              </li>
-            </ul>
-            <p className="mt-3">
-              We select third-party providers with data protection and minimal data collection in mind. We do not sell data to third parties, and we do not use advertising networks.
-            </p>
-          </div>
+        <section className="space-y-4">
+          <h2 className="text-xs uppercase tracking-[0.22em] text-ink/45">
+            3. How we use your data
+          </h2>
+          <p>Data you submit is used solely for the following purposes:</p>
+          <ul className="space-y-3 border-l-2 border-border pl-5">
+            <li>
+              <span className="font-medium text-ink">Sending updates</span> —
+              to inform subscribers of new essays, framework publications, and
+              book launch details, where they have signed up for this.
+            </li>
+            <li>
+              <span className="font-medium text-ink">
+                Delivering assessment results
+              </span>{" "}
+              — to send the personalised maturity report by email when
+              requested.
+            </li>
+          </ul>
+          <p>
+            We do not use your data for automated profiling, targeted
+            advertising, or sale to third parties.
+          </p>
+        </section>
 
-          <div>
-            <p className="font-bold text-brand-dark uppercase tracking-wide text-xs mb-3">4. Data Retention</p>
-            <p>
-              {/* TODO: Define retention policy once operational processes are established */}
-              Personal data is retained only for as long as necessary to fulfil the purpose for which it was collected. Contact form data is retained for a reasonable period to support follow-up communication, after which it is deleted. Newsletter subscribers may unsubscribe at any time.
-            </p>
-          </div>
+        <section className="space-y-4">
+          <h2 className="text-xs uppercase tracking-[0.22em] text-ink/45">
+            4. Third-party services
+          </h2>
+          <p>
+            This website uses a limited number of third-party services:
+          </p>
+          <ul className="space-y-3 border-l-2 border-border pl-5">
+            <li>
+              <span className="font-medium text-ink">
+                Supabase (database and authentication)
+              </span>{" "}
+              — subscriber emails and assessment results are stored in a
+              Supabase PostgreSQL database hosted on AWS infrastructure in
+              Europe. Supabase privacy policy:{" "}
+              <span className="text-ink/50">supabase.com/privacy</span>
+            </li>
+            <li>
+              <span className="font-medium text-ink">
+                Resend (email delivery)
+              </span>{" "}
+              — transactional emails (newsletter confirmations, assessment
+              reports) are sent via Resend. Resend privacy policy:{" "}
+              <span className="text-ink/50">resend.com/legal/privacy-policy</span>
+            </li>
+            <li>
+              <span className="font-medium text-ink">
+                Vercel Analytics (website analytics)
+              </span>{" "}
+              — privacy-friendly, cookieless page view analytics hosted by
+              Vercel. No personal data is stored; no cookie banner is required.
+              Vercel privacy policy:{" "}
+              <span className="text-ink/50">vercel.com/legal/privacy-policy</span>
+            </li>
+          </ul>
+        </section>
 
-          <div>
-            <p className="font-bold text-brand-dark uppercase tracking-wide text-xs mb-3">5. Your Rights as a Data Subject</p>
-            <p>
-              Depending on your jurisdiction, you may have the following rights with respect to your personal data:
-            </p>
-            <ul className="mt-3 space-y-1 list-none pl-4 border-l-2 border-brand-accent/20">
-              <li><span className="font-medium text-brand-dark">Access</span> — to request a copy of the data we hold about you.</li>
-              <li><span className="font-medium text-brand-dark">Correction</span> — to request that inaccurate data be corrected.</li>
-              <li><span className="font-medium text-brand-dark">Deletion</span> — to request that your data be erased where there is no lawful basis for retention.</li>
-              <li><span className="font-medium text-brand-dark">Objection</span> — to object to the use of your data for specific purposes.</li>
-            </ul>
-            <p className="mt-3">
-              To exercise any of these rights, please contact us at the address below. We will respond within a reasonable timeframe and in accordance with applicable law.
-            </p>
-          </div>
+        <section className="space-y-4">
+          <h2 className="text-xs uppercase tracking-[0.22em] text-ink/45">
+            5. Data retention
+          </h2>
+          <p>
+            Subscriber email addresses are retained for as long as the
+            subscription is active. Assessment results are retained
+            indefinitely in aggregated form for analysis. You may request
+            deletion at any time by writing to the contact address below.
+          </p>
+        </section>
 
-          <div>
-            <p className="font-bold text-brand-dark uppercase tracking-wide text-xs mb-3">6. Contact for Privacy Questions</p>
-            <p>
-              For any questions or requests relating to this privacy notice or the handling of your personal data, please write to:
-            </p>
-            <div className="mt-3 pl-4 border-l-2 border-brand-accent/20">
-              {/* TODO: Insert contact email address for privacy requests */}
-              <p className="font-medium text-brand-dark">AION Governance — Data Privacy</p>
-              <p className="italic text-gray-400">[TODO: insert contact email address]</p>
-            </div>
-          </div>
+        <section className="space-y-4">
+          <h2 className="text-xs uppercase tracking-[0.22em] text-ink/45">
+            6. Your rights
+          </h2>
+          <p>
+            Under GDPR and the Swiss Federal Act on Data Protection (revFADP),
+            you have the right to access, correct, or delete personal data we
+            hold about you, and to object to its processing. To exercise any of
+            these rights, write to{" "}
+            <a
+              href="mailto:fabio@aion-governance.ch"
+              className="text-ink hover:text-ink/70 transition-colors"
+            >
+              fabio@aion-governance.ch
+            </a>
+            . We will respond within 30 days.
+          </p>
+        </section>
 
-          <div className="pt-4 border-t border-gray-100">
-            <p className="text-xs text-gray-400">
-              {/* TODO: Update this date when the notice is reviewed and finalised */}
-              This privacy notice is a working draft. Last reviewed: 2025. It will be updated prior to launch and whenever material changes occur.
-            </p>
-          </div>
+        <section className="space-y-4">
+          <h2 className="text-xs uppercase tracking-[0.22em] text-ink/45">
+            7. Changes to this notice
+          </h2>
+          <p>
+            This notice may be updated when material changes occur. The date
+            below reflects the last revision.
+          </p>
+        </section>
 
+        <div className="border-t border-border pt-6">
+          <p className="text-sm text-ink/45">
+            Last updated: April 2026 · Questions:{" "}
+            <a
+              href="mailto:fabio@aion-governance.ch"
+              className="text-ink/60 hover:text-ink transition-colors"
+            >
+              fabio@aion-governance.ch
+            </a>
+          </p>
         </div>
-      </section>
+
+      </div>
     </div>
   );
 }

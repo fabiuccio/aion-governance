@@ -381,6 +381,11 @@ export function AssessmentTool() {
         setStep(SECTIONS[idx + 1].id);
       } else {
         setStep("results");
+        try {
+          localStorage.setItem("aion_assessment_answers", JSON.stringify(answers));
+        } catch {
+          // ignore — localStorage may be unavailable
+        }
       }
     }
   }

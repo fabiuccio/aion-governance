@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 import { NewsletterSignup } from "@/components/newsletter-signup";
 
@@ -146,6 +147,42 @@ export default function BookPage() {
             essay — drop your email below.
           </p>
         </div>
+      </section>
+
+      <section className="mt-12 grid gap-6 md:grid-cols-2">
+        <Link
+          href="/assessment"
+          className="rounded-[1.75rem] border border-border bg-paper p-7 transition hover:border-accent/35"
+        >
+          <p className="text-xs uppercase tracking-[0.22em] text-ink/45">
+            Free tool
+          </p>
+          <h3 className="mt-3 font-serif text-2xl text-ink">
+            Take the Maturity Assessment
+          </h3>
+          <p className="mt-3 text-base leading-7 text-ink/70">
+            25 questions. Under 10 minutes. Instant score across the five
+            governance dimensions in the book — from Invisible to Strategic.
+          </p>
+          <p className="mt-4 text-sm text-accent">Start the assessment →</p>
+        </Link>
+        <Link
+          href="/downloads"
+          className="rounded-[1.75rem] border border-border bg-paper p-7 transition hover:border-accent/35"
+        >
+          <p className="text-xs uppercase tracking-[0.22em] text-ink/45">
+            Templates
+          </p>
+          <h3 className="mt-3 font-serif text-2xl text-ink">
+            Download the Sprint Templates
+          </h3>
+          <p className="mt-3 text-base leading-7 text-ink/70">
+            The five working templates from the Executive Action Framework —
+            AI inventory, ownership register, minimum viable policy, and board
+            report outline.
+          </p>
+          <p className="mt-4 text-sm text-accent">Browse downloads →</p>
+        </Link>
       </section>
 
       <div className="mt-12">
