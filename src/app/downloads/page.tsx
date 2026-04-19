@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { DownloadCard } from "@/components/download-card";
 
 export const metadata: Metadata = {
-  title: "Downloads",
+  title: "Practitioner's Toolkit",
   description:
-    "Working templates from the Executive Action Framework — AI inventory, ownership register, minimum viable policy, and board report outline.",
+    "Five premium working templates from the Executive Action Framework — included with Govern or Fail at launch. Join the early access list.",
 };
 
 const DOWNLOADS = [
@@ -109,18 +109,31 @@ export default function DownloadsPage() {
     <div className="mx-auto max-w-6xl px-5 pb-24 pt-16 sm:px-8">
       <div className="max-w-3xl">
         <p className="text-xs uppercase tracking-[0.28em] text-ink/45">
-          Templates
+          Practitioner&apos;s Toolkit · Included with the book
         </p>
-        <h1 className="mt-5 font-serif text-5xl text-ink">Downloads</h1>
+        <h1 className="mt-5 font-serif text-5xl text-ink">
+          The working documents.
+        </h1>
         <p className="mt-6 text-xl leading-9 text-ink/72">
-          The five working templates from the Executive Action Framework. Each
-          one is a deliverable from the 90-day sprint — leave the program with
-          all five filled in.
+          Most governance programmes produce reports about what should exist.
+          These produce the things that should exist. Five templates — one per
+          phase of the 90-day Executive Action sprint — designed to be filled
+          in, signed off, and kept.
         </p>
-        <p className="mt-4 text-base text-ink/55">
-          Files are being finalised for release. Enter your email on any
-          template to be notified when it ships.
+        <p className="mt-5 text-base leading-7 text-ink/70">
+          The toolkit ships with <em>Govern or Fail</em>. Each template is a
+          real working document: the AI inventory your business units fill in,
+          the ownership register your board reviews, the minimum viable policy
+          your technical owner signs, the board slide your governance lead
+          presents. Not slides about governance. The governance.
         </p>
+        <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-shell px-4 py-2 text-sm text-ink/65">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" className="shrink-0">
+            <rect x="2.5" y="5.5" width="8" height="6" rx="1" stroke="currentColor" strokeWidth="1.2"/>
+            <path d="M4.5 5.5V4a2 2 0 114 0v1.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+          </svg>
+          Being finalised for launch — register below to receive your copy first
+        </div>
       </div>
 
       <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">

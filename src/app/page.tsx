@@ -139,7 +139,7 @@ export default async function HomePage() {
           <p className="text-xs uppercase tracking-[0.28em] text-ink/45">
             A note on this site
           </p>
-          <div className="mt-8 max-w-3xl space-y-5 font-serif text-xl leading-9 text-ink">
+          <div className="mt-8 space-y-5 font-serif text-xl leading-9 text-ink">
             <p>
               I started paying close attention to AI in late 2022, when GPT-3.5
               made it clear the work of the next decade was going to be different

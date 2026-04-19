@@ -4,11 +4,23 @@ import { useEffect, useRef, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
+import ImageExtension from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
 import { marked } from "marked";
 import TurndownService from "turndown";
 
 const td = new TurndownService({ headingStyle: "atx", bulletListMarker: "-", codeBlockStyle: "fenced" });
+// Preserve img tags as markdown image syntax
+td.addRule("image", {
+  filter: "img",
+  replacement: (_content, node) => {
+    const img = node as HTMLImageElement;
+    const alt = img.alt || "";
+    const src = img.getAttribute("src") || "";
+    const title = img.title ? ` "${img.title}"` : "";
+    return src ? `\n\n![${alt}](${src}${title})\n\n` : "";
+  },
+});
 
 function markdownToHtml(md: string): string {
   if (!md) return "";
@@ -48,26 +60,27 @@ function Divider() {
   return <div className="mx-1 h-5 w-px bg-border" />;
 }
 
+type ActiveBar = "link" | "image" | null;
+
 interface AdminWysiwygEditorProps {
   initialMarkdown?: string;
   onChange?: (markdown: string) => void;
 }
 
 export function AdminWysiwygEditor({ initialMarkdown = "", onChange }: AdminWysiwygEditorProps) {
+  const [activeBar, setActiveBar] = useState<ActiveBar>(null);
   const [linkUrl, setLinkUrl] = useState("");
-  const [showLinkInput, setShowLinkInput] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageAlt, setImageAlt] = useState("");
   const linkInputRef = useRef<HTMLInputElement>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
-      StarterKit.configure({
-        heading: { levels: [2, 3] },
-      }),
-      Link.configure({
-        openOnClick: false,
-        HTMLAttributes: { rel: "noopener noreferrer" },
-      }),
+      StarterKit.configure({ heading: { levels: [2, 3] } }),
+      Link.configure({ openOnClick: false, HTMLAttributes: { rel: "noopener noreferrer" } }),
+      ImageExtension.configure({ inline: false, allowBase64: false }),
       Placeholder.configure({ placeholder: "Start writing…" }),
     ],
     content: markdownToHtml(initialMarkdown),
@@ -82,10 +95,16 @@ export function AdminWysiwygEditor({ initialMarkdown = "", onChange }: AdminWysi
   });
 
   useEffect(() => {
-    if (showLinkInput) linkInputRef.current?.focus();
-  }, [showLinkInput]);
+    if (activeBar === "link") linkInputRef.current?.focus();
+    if (activeBar === "image") imageInputRef.current?.focus();
+  }, [activeBar]);
 
   if (!editor) return null;
+
+  function openLinkBar() {
+    setLinkUrl(editor?.getAttributes("link").href ?? "");
+    setActiveBar("link");
+  }
 
   function applyLink() {
     if (!linkUrl) {
@@ -93,14 +112,29 @@ export function AdminWysiwygEditor({ initialMarkdown = "", onChange }: AdminWysi
     } else {
       editor?.chain().focus().setLink({ href: linkUrl }).run();
     }
-    setShowLinkInput(false);
+    setActiveBar(null);
     setLinkUrl("");
   }
 
-  function openLinkInput() {
-    const existing = editor?.getAttributes("link").href ?? "";
-    setLinkUrl(existing);
-    setShowLinkInput(true);
+  function openImageBar() {
+    setImageUrl("");
+    setImageAlt("");
+    setActiveBar("image");
+  }
+
+  function insertImage() {
+    if (!imageUrl) return;
+    editor?.chain().focus().setImage({ src: imageUrl, alt: imageAlt }).run();
+    setActiveBar(null);
+    setImageUrl("");
+    setImageAlt("");
+  }
+
+  function closeBar() {
+    setActiveBar(null);
+    setLinkUrl("");
+    setImageUrl("");
+    setImageAlt("");
   }
 
   return (
@@ -152,7 +186,7 @@ export function AdminWysiwygEditor({ initialMarkdown = "", onChange }: AdminWysi
 
         <Divider />
 
-        <ToolbarButton title="Link" onClick={openLinkInput} active={editor.isActive("link")}>
+        <ToolbarButton title="Link" onClick={openLinkBar} active={editor.isActive("link")}>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5.5 8.5a3 3 0 004.243 0l1.5-1.5a3 3 0 00-4.243-4.243L6.25 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/><path d="M8.5 5.5a3 3 0 00-4.243 0L2.757 7a3 3 0 004.243 4.243L7.75 10.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>
         </ToolbarButton>
         {editor.isActive("link") && (
@@ -160,6 +194,11 @@ export function AdminWysiwygEditor({ initialMarkdown = "", onChange }: AdminWysi
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5.5 8.5a3 3 0 004.243 0l1.5-1.5a3 3 0 00-4.243-4.243L6.25 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeDasharray="3 2"/><path d="M8.5 5.5a3 3 0 00-4.243 0L2.757 7a3 3 0 004.243 4.243L7.75 10.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeDasharray="3 2"/><line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>
           </ToolbarButton>
         )}
+
+        {/* Image insert button */}
+        <ToolbarButton title="Insert image" onClick={openImageBar} active={activeBar === "image"}>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.3"/><circle cx="4.5" cy="5.5" r="1" fill="currentColor"/><path d="M1 9l3-3 2.5 2.5L9 6l4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </ToolbarButton>
 
         <div className="ml-auto flex items-center gap-1">
           <ToolbarButton title="Undo (⌘Z)" onClick={() => editor.chain().focus().undo().run()}>
@@ -172,7 +211,7 @@ export function AdminWysiwygEditor({ initialMarkdown = "", onChange }: AdminWysi
       </div>
 
       {/* Link input bar */}
-      {showLinkInput && (
+      {activeBar === "link" && (
         <div className="flex items-center gap-2 border-b border-border bg-shell/50 px-3 py-2">
           <input
             ref={linkInputRef}
@@ -181,7 +220,7 @@ export function AdminWysiwygEditor({ initialMarkdown = "", onChange }: AdminWysi
             onChange={(e) => setLinkUrl(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") { e.preventDefault(); applyLink(); }
-              if (e.key === "Escape") { setShowLinkInput(false); setLinkUrl(""); }
+              if (e.key === "Escape") closeBar();
             }}
             placeholder="https://..."
             className="h-8 flex-1 rounded-lg border border-border bg-paper px-3 text-sm outline-none focus:border-accent"
@@ -189,7 +228,42 @@ export function AdminWysiwygEditor({ initialMarkdown = "", onChange }: AdminWysi
           <button type="button" onClick={applyLink} className="h-8 rounded-lg bg-ink px-3 text-xs text-paper">
             Apply
           </button>
-          <button type="button" onClick={() => { setShowLinkInput(false); setLinkUrl(""); }} className="h-8 rounded-lg border border-border px-3 text-xs text-ink/60">
+          <button type="button" onClick={closeBar} className="h-8 rounded-lg border border-border px-3 text-xs text-ink/60">
+            Cancel
+          </button>
+        </div>
+      )}
+
+      {/* Image input bar */}
+      {activeBar === "image" && (
+        <div className="flex flex-wrap items-center gap-2 border-b border-border bg-shell/50 px-3 py-2">
+          <input
+            ref={imageInputRef}
+            type="url"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") { e.preventDefault(); insertImage(); }
+              if (e.key === "Escape") closeBar();
+            }}
+            placeholder="Image URL (paste from uploader above)"
+            className="h-8 flex-1 min-w-0 rounded-lg border border-border bg-paper px-3 text-sm outline-none focus:border-accent"
+          />
+          <input
+            type="text"
+            value={imageAlt}
+            onChange={(e) => setImageAlt(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") { e.preventDefault(); insertImage(); }
+              if (e.key === "Escape") closeBar();
+            }}
+            placeholder="Alt text (optional)"
+            className="h-8 w-44 rounded-lg border border-border bg-paper px-3 text-sm outline-none focus:border-accent"
+          />
+          <button type="button" onClick={insertImage} disabled={!imageUrl} className="h-8 rounded-lg bg-ink px-3 text-xs text-paper disabled:opacity-40">
+            Insert
+          </button>
+          <button type="button" onClick={closeBar} className="h-8 rounded-lg border border-border px-3 text-xs text-ink/60">
             Cancel
           </button>
         </div>
