@@ -32,7 +32,7 @@ export default function FrameworksPage() {
             The Debt Quadrant — diagnostic.
           </strong>{" "}
           Where does your AI estate actually sit? Two axes, four positions. Most
-          organisations self-assess as "Governed" and data-assess as "Reckless."
+          organisations self-assess as &ldquo;Governed&rdquo; and data-assess as &ldquo;Reckless.&rdquo;
           The gap is usually the most useful finding.
         </p>
         <p>
