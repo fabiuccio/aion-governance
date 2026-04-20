@@ -8,12 +8,10 @@ import { cn } from "@/lib/utils";
 
 const TOOLS_MENU = [
   {
-    group: "Tools",
+    group: "Self-assessment",
     items: [
       { href: "/assessment", label: "Maturity Assessment", description: "Score your AI governance across 5 dimensions" },
       { href: "/debt-quadrant", label: "Debt Quadrant", description: "Plot discipline vs. velocity for your AI estate" },
-      { href: "/sprint", label: "90-Day Sprint", description: "Executive action framework with 5 templates" },
-      { href: "/downloads", label: "Downloads", description: "Working templates from the book" },
     ],
   },
   {

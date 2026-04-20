@@ -27,8 +27,6 @@ export function SiteFooter() {
             <nav className="flex flex-col gap-2">
               <Link href="/assessment" className="hover:text-ink transition-colors">Assessment</Link>
               <Link href="/debt-quadrant" className="hover:text-ink transition-colors">Debt Quadrant</Link>
-              <Link href="/sprint" className="hover:text-ink transition-colors">90-Day Sprint</Link>
-              <Link href="/downloads" className="hover:text-ink transition-colors">Downloads</Link>
             </nav>
           </div>
           <div className="space-y-3">

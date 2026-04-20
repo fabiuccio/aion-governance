@@ -90,6 +90,13 @@ export default function BookPage() {
               Assessment, Data Notes, Glossary, and Resources
             </li>
             <li>A 36-month cost scenario model with full assumptions</li>
+            <li>
+              A complete 90-day Executive Action Framework with five phases,
+              named deliverables, and five operational templates — Business Unit
+              AI Inventory Survey, AI System Record, Minimum Viable Policy, AI
+              Ownership Register, and Board Report Slide Outline. In Chapter 12
+              and Appendix B.
+            </li>
           </ul>
         </div>
         <div className="rounded-[1.75rem] border border-border bg-paper p-6">
@@ -167,21 +174,21 @@ export default function BookPage() {
           <p className="mt-4 text-sm text-accent">Start the assessment →</p>
         </Link>
         <Link
-          href="/downloads"
+          href="/debt-quadrant"
           className="rounded-[1.75rem] border border-border bg-paper p-7 transition hover:border-accent/35"
         >
           <p className="text-xs uppercase tracking-[0.22em] text-ink/45">
-            Templates
+            Free tool
           </p>
           <h3 className="mt-3 font-serif text-2xl text-ink">
-            Download the Sprint Templates
+            Plot the Debt Quadrant
           </h3>
           <p className="mt-3 text-base leading-7 text-ink/70">
-            The five working templates from the Executive Action Framework —
-            AI inventory, ownership register, minimum viable policy, and board
-            report outline.
+            Two axes — governance discipline and value velocity — four
+            positions. Find out where your AI estate actually sits, not where
+            you think it does.
           </p>
-          <p className="mt-4 text-sm text-accent">Browse downloads →</p>
+          <p className="mt-4 text-sm text-accent">Open the tool →</p>
         </Link>
       </section>
 

@@ -10,7 +10,11 @@
       "Bash(cat tailwind.config.js)",
       "Bash(cat next.config.ts)",
       "Bash(cat next.config.js)",
-      "Bash(cat next.config.mjs)"
+      "Bash(cat next.config.mjs)",
+      "Bash(rm \"c:/Users/fabiu/GitRepos/aion-governance/src/app/sprint/page.tsx\" \"c:/Users/fabiu/GitRepos/aion-governance/src/app/downloads/page.tsx\" \"c:/Users/fabiu/GitRepos/aion-governance/src/components/download-card.tsx\")",
+      "Bash(rmdir \"c:/Users/fabiu/GitRepos/aion-governance/src/app/sprint\" \"c:/Users/fabiu/GitRepos/aion-governance/src/app/downloads\")",
+      "Bash(rm \"c:/Users/fabiu/GitRepos/aion-governance/src/app/frameworks/[slug]/page.tsx\")",
+      "Bash(rmdir \"c:/Users/fabiu/GitRepos/aion-governance/src/app/frameworks/[slug]\")"
     ]
   }
 }
