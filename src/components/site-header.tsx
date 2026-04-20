@@ -115,7 +115,7 @@ export function SiteHeader() {
           <span className="text-sm uppercase tracking-[0.28em] text-ink/60">
             AION
           </span>
-          <span className="font-serif text-lg text-ink">Fabio Aulico</span>
+          <span className="font-serif text-lg text-ink">Governance</span>
         </Link>
         <nav className="hidden items-center gap-6 md:flex">
           {PRIMARY_NAV.map((item) => (
