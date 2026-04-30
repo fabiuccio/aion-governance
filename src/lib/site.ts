@@ -1,9 +1,8 @@
 export const siteConfig = {
-  name: "Fabio Aulico",
+  name: "AION Governance",
   shortName: "AION",
-  title: "Fabio Aulico | Essays on AI governance and enterprise architecture",
-  description:
-    "Fabio Aulico's essays and forthcoming book on why enterprise AI scales when governance is architecture, not policy.",
+  title: "AION Governance — Coming Soon",
+  description: "AION Governance — coming soon.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://aion-governance.ch",
   email: "fabio@aion-governance.ch",
   social: {

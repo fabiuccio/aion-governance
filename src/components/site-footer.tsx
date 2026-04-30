@@ -8,7 +8,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-12 text-sm text-ink/65 sm:px-8 md:flex-row md:justify-between md:gap-8">
         <div className="max-w-sm space-y-3">
           <p className="font-serif text-xl text-ink">
-            Fabio Aulico · AION Governance
+            AION Governance
           </p>
           <p>
             Essays, notes, and frameworks on AI governance, enterprise
@@ -43,7 +43,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-border/70 px-5 py-4 text-center text-xs uppercase tracking-[0.18em] text-ink/45 sm:px-8">
-        © {year} Fabio Aulico
+        © {year} AION Governance
       </div>
     </footer>
   );

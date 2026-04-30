@@ -14,26 +14,27 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
   openGraph: {
     title: siteConfig.title,
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: siteConfig.name,
     type: "website",
-    images: [
-      {
-        url: "/images/cover-B-typographic.png",
-        width: 1200,
-        height: 630,
-        alt: "Govern or Fail — The Executive Playbook for Enterprise AI That Actually Scales",
-      },
-    ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: siteConfig.title,
     description: siteConfig.description,
-    images: ["/images/cover-B-typographic.png"],
   },
 };
 
